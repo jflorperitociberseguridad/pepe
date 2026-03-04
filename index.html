@@ -1,1 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mecánica Cuántica | Explorando lo Invisible</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fontsource.org/roboto-mono/400.css" rel="stylesheet">
+    <link href="https://fontsource.org/inter/400.css" rel="stylesheet">
+    <link href="https://fontsource.org/inter/700.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        .font-mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+        .quantum-gradient {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(168, 85, 247, 0.5);
+            box-shadow: 0 10px 30px -10px rgba(168, 85, 247, 0.3);
+        }
+        .hero-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            box-shadow: 0 0 50px rgba(99, 102, 241, 0.2);
+        }
+        .hero-image-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent, #0f172a);
+        }
+        #quantum-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+        .wave-animation {
+            animation: wave 3s infinite ease-in-out;
+        }
+        @keyframes wave {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.1); }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-purple-500 selection:text-white">
+
+    <!-- Background Animation Canvas -->
+    <canvas id="quantum-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 start-0 border-b border-white/10 bg-slate-900/80 backdrop-blur-md">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <span class="self-center text-2xl font-bold whitespace-nowrap quantum-gradient">Quantum<span class="text-white">Mech</span></span>
+            </a>
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
+                    <li><a href="#inicio" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-purple-400 md:p-0" aria-current="page">Inicio</a></li>
+                    <li><a href="#conceptos" class="block py-2 px-3 text-gray-300 hover:text-white md:p-0 transition-colors">Conceptos</a></li>
+                    <li><a href="#aplicaciones" class="block py-2 px-3 text-gray-300 hover:text-white md:p-0 transition-colors">Aplicaciones</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="px-4 mx-auto max-w-7xl text-center relative z-10">
+            <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-6xl lg:text-7xl">
+                El Universo a Escala <br>
+                <span class="quantum-gradient">Subatómica</span>
+            </h1>
+            <p class="mb-8 text-lg font-normal text-gray-400 lg:text-xl sm:px-16 xl:px-48">
+                Adéntrate en el extraño y fascinante mundo donde las reglas de la física clásica se desvanecen y la probabilidad gobierna la realidad.
+            </p>
+            <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+                <a href="#conceptos" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:ring-purple-900 transition-all shadow-[0_0_20px_rgba(147,51,234,0.5)]">
+                    Explorar Teoría
+                    <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                    </svg>
+                </a>
+                <a href="#simulacion" class="inline-flex justify-center items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-gray-300 rounded-lg border border-gray-600 hover:text-white hover:bg-gray-800 focus:ring-4 focus:ring-gray-800 transition-all">
+                    Ver Simulación
+                </a>
+            </div>
+            
+            <div class="hero-image-container mx-auto max-w-4xl mt-12">
+                <img src="https://image.qwenlm.ai/public_source/97329427-7d8c-437f-bc45-0fae711b016d/1fcb7fc1f-ce09-430e-82aa-4690d1eb1511.png" alt="Visualización Cuántica" class="w-full h-auto object-cover">
+            </div>
+        </div>
+    </section>
+
+    <!-- Concepts Section -->
+    <section id="conceptos" class="py-24 bg-slate-900/50 relative">
+        <div class="px-4 mx-auto max-w-7xl">
+            <h2 class="mb-16 text-3xl font-bold text-center text-white md:text-5xl">
+                Pilares Fundamentales
+            </h2>
+            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Card 1 -->
+                <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-blue-500 rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                    <div class="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-blue-900/50 text-blue-400">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="mb-2 text-xl font-bold text-white">Superposición</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Un sistema cuántico puede existir en múltiples estados simultáneamente hasta que es medido. El famoso "Gato de Schrödinger" ilustra este principio paradójico.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-purple-500 rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                    <div class="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-purple-900/50 text-purple-400">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                    </div>
+                    <h3 class="mb-2 text-xl font-bold text-white">Entrelazamiento</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Fenómeno donde dos partículas se vinculan de tal manera que el estado de una afecta instantáneamente al estado de la otra, sin importar la distancia.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-pink-500 rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                    <div class="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-lg bg-pink-900/50 text-pink-400">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                    </div>
+                    <h3 class="mb-2 text-xl font-bold text-white">Incertidumbre</h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        Principio de Heisenberg: Es imposible medir con precisión infinita ciertos pares de propiedades físicas, como la posición y el momento.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Wave Function Section -->
+    <section id="simulacion" class="py-24 relative overflow-hidden">
+        <div class="px-4 mx-auto max-w-7xl flex flex-col lg:flex-row items-center gap-12">
+            <div class="lg:w-1/2">
+                <h2 class="text-3xl font-bold text-white mb-6">La Función de Onda</h2>
+                <p class="text-gray-400 mb-6 text-lg">
+                    En mecánica cuántica, las partículas no son puntos sólidos, sino ondas de probabilidad descritas por la ecuación de Schrödinger.
+                </p>
+                <div class="p-6 bg-slate-800 rounded-lg border border-slate-700 font-mono text-sm text-green-400 mb-6">
+                    <p>iℏ ∂/∂t Ψ(r,t) = Ĥ Ψ(r,t)</p>
+                    <p class="mt-2 text-gray-500">// Donde Ψ es la función de onda</p>
+                </div>
+                <p class="text-gray-400">
+                    Interactúa con el canvas de la derecha para perturbar el campo cuántico y observar cómo se propagan las ondas de probabilidad.
+                </p>
+            </div>
+            <div class="lg:w-1/2 w-full h-96 bg-slate-900 rounded-2xl border border-slate-700 relative overflow-hidden shadow-2xl" id="wave-container">
+                <canvas id="wave-canvas" class="absolute inset-0 w-full h-full"></canvas>
+                <div class="absolute bottom-4 right-4 text-xs text-slate-500 font-mono">
+                    Mueve el cursor para interactuar
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Applications Section -->
+    <section id="aplicaciones" class="py-24 bg-gradient-to-b from-slate-900 to-black">
+        <div class="px-4 mx-auto max-w-7xl">
+            <h2 class="text-3xl font-bold text-center text-white mb-12">Tecnologías del Futuro</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="flex items-start space-x-4 p-6 rounded-xl bg-white/5 hover:bg-white/10 transition-colors cursor-default">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 font-bold">1</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2">Computación Cuántica</h3>
+                        <p class="text-gray-400 text-sm">Uso de qubits para resolver problemas complejos millones de veces más rápido que las supercomputadoras actuales.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4 p-6 rounded-xl bg-white/5 hover:bg-white/10 transition-colors cursor-default">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 font-bold">2</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2">Criptografía Cuántica</h3>
+                        <p class="text-gray-400 text-sm">Sistemas de comunicación inquebrantables basados en las leyes de la física, no en la complejidad matemática.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4 p-6 rounded-xl bg-white/5 hover:bg-white/10 transition-colors cursor-default">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 font-bold">3</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2">Sensores Cuánticos</h3>
+                        <p class="text-gray-400 text-sm">Dispositivos de medición ultra-precisos para gravedad, tiempo y campos magnéticos.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4 p-6 rounded-xl bg-white/5 hover:bg-white/10 transition-colors cursor-default">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 font-bold">4</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2">Teletransporte Cuántico</h3>
+                        <p class="text-gray-400 text-sm">Transferencia de estado cuántico entre partículas distantes, base para la internet cuántica.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-12">
+        <div class="px-4 mx-auto max-w-7xl text-center">
+            <span class="text-2xl font-bold whitespace-nowrap quantum-gradient mb-4 block">Quantum<span class="text-white">Mech</span></span>
+            <p class="text-gray-500 mb-6 max-w-md mx-auto">
+                Explorando los límites de la realidad a través de la ciencia y la tecnología.
+            </p>
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                    <span class="sr-only">GitHub</span>
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path></svg>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                    <span class="sr-only">Twitter</span>
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path></svg>
+                </a>
+            </div>
+            <p class="text-sm text-gray-600">
+                &copy; 2023 QuantumMech. Todos los derechos reservados. Diseñado con física cuántica.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Background Particle System (Quantum Field)
+        const canvas = document.getElementById('quantum-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+                this.color = `rgba(${Math.random() > 0.5 ? '147, 51, 234' : '59, 130, 246'}, ${Math.random() * 0.5 + 0.1})`;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.floor((width * height) / 15000);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Draw connections
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(147, 51, 234, ${0.1 - distance/1000})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', () => {
+            resize();
+            initParticles();
+        });
+
+        resize();
+        initParticles();
+        animateParticles();
+
+        // Wave Function Simulation (Interactive)
+        const waveCanvas = document.getElementById('wave-canvas');
+        const waveCtx = waveCanvas.getContext('2d');
+        let waveWidth, waveHeight;
+        let mouse = { x: -1000, y: -1000 };
+        let time = 0;
+
+        function resizeWave() {
+            const container = document.getElementById('wave-container');
+            waveWidth = container.clientWidth;
+            waveHeight = container.clientHeight;
+            waveCanvas.width = waveWidth;
+            waveCanvas.height = waveHeight;
+        }
+
+        window.addEventListener('resize', resizeWave);
+        resizeWave();
+
+        waveCanvas.addEventListener('mousemove', (e) => {
+            const rect = waveCanvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+        });
+
+        waveCanvas.addEventListener('mouseleave', () => {
+            mouse.x = -1000;
+            mouse.y = -1000;
+        });
+
+        function drawWave() {
+            waveCtx.fillStyle = 'rgba(15, 23, 42, 0.2)'; // Trail effect
+            waveCtx.fillRect(0, 0, waveWidth, waveHeight);
+
+            time += 0.05;
+
+            const centerX = waveWidth / 2;
+            const centerY = waveHeight / 2;
+
+            // Draw interference pattern
+            for (let x = 0; x < waveWidth; x += 4) {
+                for (let y = 0; y < waveHeight; y += 4) {
+                    const dx = x - centerX;
+                    const dy = y - centerY;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    
+                    // Source 1 (Center)
+                    const wave1 = Math.sin(dist * 0.05 - time);
+                    
+                    // Source 2 (Mouse)
+                    const mdx = x - mouse.x;
+                    const mdy = y - mouse.y;
+                    const mDist = Math.sqrt(mdx*mdx + mdy*mdy);
+                    const wave2 = Math.sin(mDist * 0.05 - time) * (mouse.x > 0 ? 1 : 0);
+
+                    const interference = (wave1 + wave2) / 2;
+                    
+                    // Color mapping based on amplitude
+                    const intensity = Math.abs(interference);
+                    const hue = 240 + intensity * 60; // Blue to Purple
+                    const lightness = 20 + intensity * 40;
+                    
+                    waveCtx.fillStyle = `hsl(${hue}, 70%, ${lightness}%)`;
+                    waveCtx.fillRect(x, y, 4, 4);
+                }
+            }
+
+            requestAnimationFrame(drawWave);
+        }
+
+        drawWave();
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
 
